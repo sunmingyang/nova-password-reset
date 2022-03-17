@@ -10,7 +10,7 @@ class PasswordResetController extends Controller {
 
     public function reset(PasswordResetRequest $request) {
         $user = $request->user();
-        $user->password = Hash::make($request->new_password);
+        $user->password = Hash::make($request->new_password.config('hashing.secret_key'));
         $user->save();
 
         return 'Successful.';
